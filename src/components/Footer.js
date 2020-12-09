@@ -1,12 +1,11 @@
-import React from 'react';
-import './Footer.css'
+import React from "react";
 
-export default function Footer() {
+function Footer() {
     return (
-      <nav className="footer">
-        
-        <a className = "footer">  © 2020 TC-Food Share </a>
+        <footer className="footer">
+            &copy; Portfolio Version Copyright 2020
+        </footer>
+    )
+}
 
-      </nav>
-    );
-  }
+export default Footer;

@@ -1,14 +1,18 @@
-import React from 'react';
-import './Navbar.css'
+import React from "react";
+import { Link } from "react-router-dom";
 
-export default function Navbar() {
-    return (
-      <nav className="navbar navbar-light bg-light">
-        <a className="navbar-brand" href="">
-         TC -Food Share
-        </a>
-        <a className = "navbar-brand" href="">Login</a>
+function Navbar() {
+    return(
+        <div>
+            <nav className="navbar navbar-light bg-light">
+            <Link className="navbar-brand" to="/React-Portfolio/home">Food Finder</Link>
+             <ul className="navbar-nav">
+                 <Link className="nav-item active" to="/React-Portoflio/contact">Search</Link>
+                 <Link className="nav-item active" to="/React-Portoflio/project">Login/Signup</Link>
+             </ul>
+             </nav>
+        </div>
+    )
+}
 
-      </nav>
-    );
-  }
+export default Navbar;
