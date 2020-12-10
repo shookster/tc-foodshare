@@ -18,5 +18,12 @@ module.exports = function (sequelize, DataTypes) {
     });
   };
 
+  Location.associate = function (models) {
+    Location.belongsTo(models.Food, {
+      foreignKey: {
+        allowNull: false,
+      },
+    });
+  };
   return Location
 };

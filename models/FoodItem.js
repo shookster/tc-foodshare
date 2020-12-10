@@ -8,13 +8,24 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false,
     },
   });
+  
   FoodItem.associate = function (models) {
-    FoodItem.belongsTo(models.Location, {
+    FoodItem.belongsTo(models.User, {
       foreignKey: {
         allowNull: false,
       },
     });
+
+    
   };
+
+  FoodItem.associate = function (models) {
+    FoodItem.hasMany(models.Location, {
+      foreignKey: {
+        allowNull: false,
+      },
+    });
+  }
 
   return FoodItem;
 };
