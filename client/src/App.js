@@ -13,7 +13,8 @@ import Navbar from "./components/Navbar";
 import Searchbar from "./components/Searchbar";
 import Footer from "./components/Footer";
 import Autocomplete from "react-google-autocomplete";
-import AddressBar from "./components/AddressBar"
+import AddressBar from "./components/AddressBar";
+import List from "./components/List";
 
 // import Header from "../../../Portfolio-React/src/components/Header";
 
@@ -37,74 +38,40 @@ class App extends React.Component {
     },
   };
 
-  getCity = (addressArray) => {
-    let city = "";
-    for (let i = 0; i < addressArray.length; i++) {
-      if (
-        addressArray[i].types[0] &&
-        "administrative_area_level_2" === addressArray[i].types[0]
-      ) {
-        city = addressArray[i].long_name;
-        return city;
-      }
-    }
-  };
-
-  getArea = (addressArray) => {
-    let area = "";
-    for (let i = 0; i < addressArray.length; i++) {
-      if (addressArray[i].types[0]) {
-        for (let j = 0; j < addressArray[i].types.length; j++) {
-          if (
-            "sublocality_level_1" === addressArray[i].types[j] ||
-            "locality" === addressArray[i].types[j]
-          ) {
-            area = addressArray[i].long_name;
-            return area;
-          }
-        }
-      }
-    }
-  };
-
-  getState = (addressArray) => {
-    let state = "";
-    for (let i = 0; i < addressArray.length; i++) {
-      for (let i = 0; i < addressArray.length; i++) {
-        if (
-          addressArray[i].types[0] &&
-          "administrative_area_level_1" === addressArray[i].types[0]
-        ) {
-          state = addressArray[i].long_name;
-          return state;
-        }
-      }
-    }
-  };
-
   onMarkerDragEnd = (event) => {
     let newLat = event.latLng.lat();
     let newLng = event.latLng.lng();
+    console.log(event);
 
     Geocode.fromLatLng(newLat, newLng).then(
-      (response) => {
-        console.log(response);
-        const address = response.results[0].formatted_address,
-          addressArray = response.results[0].address_components,
-          city = this.getCity(addressArray),
-          area = this.getArea(addressArray),
-          state = this.getState(addressArray);
-        console.log("city", city, area, state);
-        this.setState({
-          address: address ? address : "",
-          area: area ? area : "",
-          city: city ? city : "",
-          state: state ? state : "",
-        });
-      },
-      (error) => {
-        console.error(error);
-      }
+      console.log("Latitude", newLat, "Longitude", newLng)
+
+      // this.setState({mapPosition.latnewLat,
+      // })
+      // // state.mapPosition.lat.newLat,
+      // // this.setState.state.mapPosition.lng.newLng,
+      // // this.setState.state.markerPosition.lng.newLng,
+      // // this.setState.state.markerPosition.lat.newLat,
+
+      // console.log(newLat, newLng)
+
+      //   this.setState{
+      //     address: "",
+      // city: "",
+      // area: "",
+      // state: "",
+      // zoom: 15,
+      // height: 400,
+      // mapPosition: {
+      //   lat: newLat,
+      //   lng: newLng,
+      // },
+      // markerPosition: {
+      //   lat: newLat,
+
+      //   lng: newLng
+      // },
+      //   }
     );
   };
 
@@ -139,7 +106,7 @@ class App extends React.Component {
     return (
       <div>
         <Navbar />
-        <Autocomplete
+        {/* <Autocomplete
           style={{
             // justifySelf: "center",
             textAlign: "center",
@@ -149,15 +116,28 @@ class App extends React.Component {
           }}
           types={["(regions)"]}
           onPlaceSelected={this.onPlaceSelected}
-        />
+        /> */}
         {/* <AddressBar/> */}
-          
-        <MapWithAMarker
-          googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyD812o98-5qpcViO3kCoUa8mpd4eyflbPo&v=3.exp&libraries=geometry,drawing,places"
-          loadingElement={<div style={{ height: `100%` }} />}
-          containerElement={<div style={{ height: `400px`, width: `100%` }} />}
-          mapElement={<div style={{ height: `100%`, width: "100%" }} />}
-        />
+        <div className="container ">
+          <div className="row">
+            <div className="col md-6" >
+              <span style= {{textAlign:"center"}}>List of shared food in </span>
+              <List />
+            </div>
+            <div className="col md-6">
+              {" "}
+              <MapWithAMarker
+                googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyD812o98-5qpcViO3kCoUa8mpd4eyflbPo&v=3.exp&libraries=geometry,drawing,places"
+                loadingElement={<div style={{ height: `100%` }} />}
+                containerElement={
+                  <div style={{ height: `400px`, width: `100%` }} />
+                }
+                mapElement={<div style={{ height: `100%`, width: "100%" }} />}
+              />
+            </div>
+          </div>
+        </div>
+
         <Footer />
       </div>
     );
