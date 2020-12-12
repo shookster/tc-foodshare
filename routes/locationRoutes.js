@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const locationController = require("../../controllers/locationController");
+const locationController = require("../controllers/locationController");
 
 // Matches with "/api/location"
 router.route("/")

@@ -1,12 +1,19 @@
-import React from "react";
+import React, {useState} from "react";
 import "./Input.css";
 
 function Input() {
+  const [address, setAddress] = useState("") 
+  const submitHandler = (event)=>{
+event.preventDefault()
+
+  }
+
   return (
+    
     <container className="card">
 <span className="title"><h5>Please add details below</h5></span>
-
-      {/* Submit Address */}
+<form onSubmit={submitHandler}>
+{/* Submit Address */}
       <div className="row address">
         <div className="col">
           <input
@@ -15,6 +22,7 @@ function Input() {
             class="form-control"
             aria-label="Default"
             aria-describedby="inputGroup-sizing-default"
+            onChange = {(event)=> setAddress(event.target.value)}
           />
         </div>
         <div class="col">
@@ -61,9 +69,12 @@ function Input() {
       <textarea className="textarea" rows="4" cols="50" placeholder="Description / Comment">
         
       </textarea>
-      <button type="button" className="btn btn-primary btn-sm">
-        Add Description
-      </button>
+      <button type="button" className="btn btn-success btn-sm">
+Submit      </button>
+
+</form>
+
+      
     </container>
   );
 }
