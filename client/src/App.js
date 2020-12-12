@@ -5,6 +5,7 @@ import {
   Route,
 } from "react-router-dom";
 import Home from './Views/home';
+import Map from "./Views/map"
 
 
 function App() {
@@ -19,9 +20,9 @@ function App() {
             <Home /> 
               {/* Route path to Search Page */}
              </Route>
-             <Route path= "/">
+             <Route path= "/map">
                
-               {/* route to home page */}
+               <Map />
                </Route>
                <Route path="/">
                  {/* Route path to Login Page */}
