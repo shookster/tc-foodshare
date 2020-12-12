@@ -1,0 +1,18 @@
+.card{
+    margin-top: 20px;
+    background-color: rgb(211, 207, 207);
+}
+
+.textarea{
+    margin-top: 20px;
+}
+
+.address{
+margin-top: 20px;
+margin-bottom: 20px;
+}
+
+.title{
+    margin-top: 10px;
+    text-align: center;
+}

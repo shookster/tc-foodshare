@@ -9,26 +9,23 @@ import Map from "./Views/map"
 
 function App() {
   return (
-      <div>
-        <Router>
+    <div>
+      <Router>
         <div>
           <div>
           </div>
           <Switch>
-            <Route exact path = "/">
-            <Home /> 
+            <Route exact path="/">
+              <Home />
               {/* Route path to Search Page */}
-             </Route>
-             <Route path= "/map">
-               
-               <Map />
-               </Route>
-               <Route path="/">
-                 {/* Route path to Login Page */}
-               </Route>
+            </Route>
+            <Route path="/map">
+              <Map />
+            </Route>
+            <Route path="/">{/* Route path to Login Page */}</Route>
           </Switch>
-      </div>
-    </Router>
+        </div>
+      </Router>
     </div>
   );
 }
