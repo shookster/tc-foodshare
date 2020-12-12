@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-  var FoodItem = sequelize.define("food_item", {
+  var FoodItem = sequelize.define("FoodItem", {
     status: DataTypes.STRING(50),
     item_category: DataTypes.STRING(50),
     item_description: DataTypes.STRING(50),

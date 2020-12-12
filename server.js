@@ -1,6 +1,11 @@
 const express = require("express");
 
-const routes = require("./routes");
+// const routes = require("./routes");
+const foodItemRoutes = require('./routes/foodItemRoutes');
+const locationRoutes = require('./routes/locationRoutes');
+const userRoutes = require('./routes/userRoutes')
+
+// import location and user routes here
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -13,7 +18,11 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Add routes, both API and view
-app.use(routes);
+app.use('/api/', foodItemRoutes);
+app.use('/api/', locationRoutes);
+app.use('/api/', userRoutes);
+
+// add remaining routes
 
 // Connect to the Mongo DB ???
 
