@@ -12,7 +12,7 @@ export default function List(props) {
       <div> <button type="button" className="btn btn-primary btn-sm">
         Share
       </button>
-      <button type="button" className="btn btn-secondary btn-sm">
+      <button type="button" className="btn btn-success btn-sm">
         Direction
       </button></div>
       <hr color="red"/>

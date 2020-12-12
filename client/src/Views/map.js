@@ -14,6 +14,7 @@ import Footer from "../components/Footer";
 // import Autocomplete from "react-google-autocomplete";
 import List from "../components/List";
 import ListContainer from "../components/List-container";
+import Input from "../components/Input"
 
 // import Header from "../../../Portfolio-React/src/components/Header";
 
@@ -156,6 +157,7 @@ class Map extends React.Component {
                 }
                 mapElement={<div style={{ height: `100%`, width: "100%" }} />}
               />
+              <Input />
             </div>
           </div>
         </div>
