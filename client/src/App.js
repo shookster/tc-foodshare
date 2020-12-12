@@ -7,13 +7,12 @@ import {
 import Home from './Views/home';
 import Map from "./Views/map"
 
-
 function App() {
   return (
       <div>
         <Router>
         <div>
-          <div className="container">
+          <div>
           </div>
           <Switch>
             <Route exact path = "/">
