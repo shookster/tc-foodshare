@@ -2,7 +2,7 @@ const db = require("../models");
 
 module.exports = {
   findAll: function (req, res) {
-    db.FoodItem.find(req.query)
+    db.FoodItem.findAll()
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
