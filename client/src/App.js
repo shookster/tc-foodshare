@@ -2,6 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./Views/home";
 import Map from "./Views/map";
+import LoginButton from './components/LoginButton';
+import LogoutButton from './components/LogoutButton';
 import Input from "./Views/input"
 
 function App() {
