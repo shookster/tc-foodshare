@@ -1,3 +1,28 @@
-.backgroundImage{
-    background-image: url(/client/public/food.jpg);
+
+
+.homePage {
+  background-image: url(../components/image/food2.jpg);
+  /* background-repeat: no-repeat;
+  background-size: 73%; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; */
+  margin: auto;
+  height: max-content;
+  /* width: fit-content; */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.aboutCard {
+  height: 400px;  
+  background: gainsboro;
+  margin-left: 60px;
+
+}
+
+.card{
+  align-self: center;
 }
