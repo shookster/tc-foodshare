@@ -1,1 +1,10 @@
-get http://localhost:3001/api/foodItem
+post http://localhost:3001/api/input
+
+HTTP/1.1
+content-type: application/json
+
+{
+    "address": "sample",
+    "category": "other",
+    "description" "none"
+}

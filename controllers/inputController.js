@@ -3,7 +3,7 @@ const FoodItem = require("../models/FoodItem");
 
 module.exports = {
   create: function (req, res) {
-    db.location.create({ address: req.body.address }).then((location) => {
+       db.Location.create({ address: req.body.address }).then((location) => {
       return db.FoodItem.create({
         category: req.body.category,
         item_description: req.body.description,
