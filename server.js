@@ -1,11 +1,11 @@
 const express = require("express");
 
 // const routes = require("./routes");
-const foodItemRoutes = require('./routes/foodItemRoutes');
-const locationRoutes = require('./routes/locationRoutes');
-const userRoutes = require('./routes/userRoutes');
-const inputRoutes = require('./routes/inputRoutes')
-
+const foodItemRoutes = require("./routes/foodItemRoutes");
+const locationRoutes = require("./routes/locationRoutes");
+const userRoutes = require("./routes/userRoutes");
+const inputRoutes = require("./routes/inputRoutes");
+const db = require('./models')
 // import location and user routes here
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -19,16 +19,18 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Add routes, both API and view
-app.use('/api/', foodItemRoutes);
-app.use('/api/', locationRoutes);
-app.use('/api/', userRoutes);
-app.use('/api/', inputRoutes)
+app.use("/api/", foodItemRoutes);
+app.use("/api/", locationRoutes);
+app.use("/api/", userRoutes);
+app.use("/api/", inputRoutes);
 
 // add remaining routes
 
 // Connect to the Mongo DB ???
 
 // Start the API server
-app.listen(PORT, function() {
-  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
+db.sequelize.sync().then(() => {
+  app.listen(PORT, function () {
+    console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
+  });
 });

@@ -1,6 +1,5 @@
 post http://localhost:3001/api/input
 
-HTTP/1.1
 content-type: application/json
 
 {
