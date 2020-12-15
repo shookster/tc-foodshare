@@ -1,11 +1,17 @@
 import React, {useState} from "react";
 import "./Input.css";
+import API from "../utils/API"
 
-function Input() {
+function InputCard() {
   const [address, setAddress] = useState("") 
+  const [category, setCategory] = useState("") 
+  const [description, setDescription] = useState("") 
   const submitHandler = (event)=>{
 event.preventDefault()
-
+API.saveLocation({
+  address: address,
+  category: category
+})
   }
 
   return (
@@ -17,6 +23,7 @@ event.preventDefault()
       <div className="row address">
         <div className="col">
           <input
+            name = "address"
             placeholder="Enter Donating  Address"
             type="text"
             class="form-control"
@@ -35,41 +42,41 @@ event.preventDefault()
       {/* Food Category */}
       <b>Please Choose Food Category:</b>
       <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="customCheck1" />
+        <input name="category" type="checkbox" class="custom-control-input" id="customCheck1" />
         <label class="custom-control-label" for="customCheck1">
           Canned Foods
         </label>
       </div>
       <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="customCheck2" />
+        <input name="category" type="checkbox" class="custom-control-input" id="customCheck2" />
         <label class="custom-control-label" for="customCheck2">
           Breads / Grains
         </label>
       </div>
       <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="customCheck3" />
+        <input name="category" type="checkbox" class="custom-control-input" id="customCheck3" />
         <label class="custom-control-label" for="customCheck3">
           Vegetables / Fruits
         </label>
       </div>
       <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="customCheck3" />
+        <input name="category" type="checkbox" class="custom-control-input" id="customCheck3" />
         <label class="custom-control-label" for="customCheck3">
           Drinks
         </label>
       </div>
       <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="customCheck4" />
+        <input name="category" type="checkbox" class="custom-control-input" id="customCheck4" />
         <label class="custom-control-label" for="customCheck4">
           Other
         </label>
       </div>
 
       {/* Description */}
-      <textarea className="textarea" rows="4" cols="50" placeholder="Description / Comment">
+      <textarea name="description" className="textarea" rows="4" cols="50" placeholder="Description / Comment">
         
-      </textarea>
-      <button type="button" className="btn btn-success btn-sm">
+      </textarea> <br/>
+      <button type="button" className="btn btn-primary btn-md" onClick={submitHandler}>
 Submit      </button>
 
 </form>
@@ -79,4 +86,4 @@ Submit      </button>
   );
 }
 
-export default Input;
+export default InputCard;
