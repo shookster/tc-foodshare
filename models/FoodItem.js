@@ -5,7 +5,7 @@ module.exports = function (sequelize, DataTypes) {
     item_description: DataTypes.STRING(50),
     quantity: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
   });
   FoodItem.associate = function (models) {
