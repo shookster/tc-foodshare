@@ -157,7 +157,6 @@ class Map extends React.Component {
                 }
                 mapElement={<div style={{ height: `100%`, width: "100%" }} />}
               />
-              <Input />
             </div>
           </div>
         </div>

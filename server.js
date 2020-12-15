@@ -3,7 +3,8 @@ const express = require("express");
 // const routes = require("./routes");
 const foodItemRoutes = require('./routes/foodItemRoutes');
 const locationRoutes = require('./routes/locationRoutes');
-const userRoutes = require('./routes/userRoutes')
+const userRoutes = require('./routes/userRoutes');
+const inputRoutes = require('./routes/inputRoutes')
 
 // import location and user routes here
 const app = express();
@@ -21,6 +22,7 @@ if (process.env.NODE_ENV === "production") {
 app.use('/api/', foodItemRoutes);
 app.use('/api/', locationRoutes);
 app.use('/api/', userRoutes);
+app.use('/api/', inputRoutes)
 
 // add remaining routes
 
