@@ -45,9 +45,11 @@ function InputCard() {
         <div class="custom-control custom-checkbox">
           <input
             name="category"
+            value="Canned Foods"
             type="checkbox"
             class="custom-control-input"
             id="customCheck1"
+            onChange={(event) => setCategory(event.target.value)}
           />
           <label class="custom-control-label" for="customCheck1">
             Canned Foods
@@ -56,44 +58,52 @@ function InputCard() {
         <div class="custom-control custom-checkbox">
           <input
             name="category"
+            value="Breads/Grains"
             type="checkbox"
             class="custom-control-input"
             id="customCheck2"
+            onChange={(event) => setCategory(category + "-- " + event.target.value)}
           />
           <label class="custom-control-label" for="customCheck2">
-            Breads / Grains
+            Breads/Grains
           </label>
         </div>
         <div class="custom-control custom-checkbox">
           <input
             name="category"
+            value="Vegetables/Fruits"
             type="checkbox"
             class="custom-control-input"
             id="customCheck3"
+            onChange={(event) => setCategory(category + "-- " + event.target.value)}
           />
           <label class="custom-control-label" for="customCheck3">
-            Vegetables / Fruits
+            Vegetables/Fruits
           </label>
         </div>
         <div class="custom-control custom-checkbox">
           <input
             name="category"
+            value="Drink"
             type="checkbox"
             class="custom-control-input"
-            id="customCheck3"
+            id="customCheck4"
+            onChange={(event) => setCategory(category + "-- " + event.target.value)}
           />
-          <label class="custom-control-label" for="customCheck3">
+          <label class="custom-control-label" for="customCheck4">
             Drinks
           </label>
         </div>
         <div class="custom-control custom-checkbox">
           <input
             name="category"
+            value="Other"
             type="checkbox"
             class="custom-control-input"
-            id="customCheck4"
+            id="customCheck5"
+            onChange={(event) => setCategory(category + "-- " + event.target.value)}
           />
-          <label class="custom-control-label" for="customCheck4">
+          <label class="custom-control-label" for="customCheck5">
             Other
           </label>
         </div>
@@ -104,6 +114,7 @@ function InputCard() {
           rows="4"
           cols="50"
           placeholder="Description / Comment"
+          onChange={(event) => setDescription(event.target.value)}
         ></textarea>{" "}
         <br />
         <button
