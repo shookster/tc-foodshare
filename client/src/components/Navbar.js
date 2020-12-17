@@ -7,7 +7,7 @@ function Navbar() {
     return(
         <div>
             <nav className="navbar navbar-light bg-light">
-            <Link className="navbar-brand" to="/React-Portfolio/home">TC - Food Share</Link>
+            <Link className="navbar-brand" to="/">TC - Food Share</Link>
                 <ul className="navbar-nav">
                      
                          <LoginButton />
