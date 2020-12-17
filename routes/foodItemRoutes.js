@@ -7,9 +7,9 @@ router.route("/foodItem")
   .post(foodItemController.create);
 
 // Matches with "/api/foodItem/:id"
-router.route("/foodItem/:id")
-  .get(foodItemController.findById)
-  .put(foodItemController.update)
-  .delete(foodItemController.remove);
+// router.route("/foodItem/:id")
+//   .get(foodItemController.findById)
+//   .put(foodItemController.update)
+//   .delete(foodItemController.remove);
 
 module.exports = router;
