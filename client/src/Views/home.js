@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "./home.css";
+import LoginButton from "../components/LoginButton";
 
 function Home() {
   return (
@@ -13,17 +14,13 @@ function Home() {
 
         <div>
           <Link to="/map">
-              <button type="button" className="btn btn-primary btn-md">
-            Search{" "}
-          </button>
+            <button type="button" className="btn btn-primary btn-md">
+              Search{" "}
+            </button>
           </Link>
-      <Link to="/input">
-      <button type="button" className="btn btn-success btn-md">
-            Donate{" "}
-          </button>
-      </Link>
-
-          
+          <Link to="/input">
+            <LoginButton />
+          </Link>
         </div>
       </div>
 

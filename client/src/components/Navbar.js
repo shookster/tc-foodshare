@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
 
 function Navbar() {
@@ -11,15 +10,7 @@ function Navbar() {
           TC - Food Share
         </Link>
         <ul className="navbar-nav">
-          <LoginButton />
           <LogoutButton />
-
-          <Link className="nav-item active" to="">
-            Search
-          </Link>
-          <Link className="nav-item active" to="">
-            Login/Signup
-          </Link>
         </ul>
       </nav>
     </div>
