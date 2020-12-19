@@ -1,10 +1,10 @@
-.card {
+.inputCard {
   margin-top: 20px;
   background-color: rgb(243, 242, 242);
   max-width: 50%;
   margin-left: 50px;
   text-align: left;
-  justify-content: center;
+  justify-items: center;
 }
 
 .textarea {

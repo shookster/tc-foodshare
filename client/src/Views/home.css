@@ -1,28 +1,32 @@
-
-
-.homePage {
-  background-image: url(../components/image/food2.jpg);
-  /* background-repeat: no-repeat;
-  background-size: 73%; 
+.containerPage {
+  background: url(../components/image/food3.jpg) no-repeat center fixed;
+  /* height: 950px;
+  background-color: black;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: unset;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover; */
-  margin: auto;
-  height: max-content;
-  /* width: fit-content; */
+  background-size: cover;
+  padding-bottom: 0px;
+  justify-items: center; */
+  height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  position: relative;
 }
 
-.aboutCard {
-  height: 400px;  
-  background: gainsboro;
-  margin-left: 60px;
-
-}
-
-.card{
-  align-self: center;
+.about {
+  height: auto;
+  width: 400px;
+  justify-content: center;
+  justify-items: center;
+  align-content: center;
+  text-align: center;
+  color: white;
+  align-items: center;
+  border-radius: 80px;
+  position: relative;
 }

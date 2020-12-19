@@ -21,13 +21,14 @@ import ListContainer from "../components/List-container";
 import Input from "../components/Input";
 import "./map.css";
 import AutoCompletePlaces from "../components/PlacesAutoComplete";
+import API from "../utils/API"
 // import Header from "../../../Portfolio-React/src/components/Header";
-
 
 Geocode.setApiKey("AIzaSyD812o98-5qpcViO3kCoUa8mpd4eyflbPo");
 
 class Map extends React.Component {
   state = {
+    locations:[],
     address: "",
     city: "",
     area: "",
@@ -44,13 +45,23 @@ class Map extends React.Component {
     },
   };
 
+  loadLocations;
+
+  loadLocations() {
+    API.getLocation()
+      .then(res => 
+        this.setState.locations(res.data)
+      )
+      .catch(err => console.log(err));
+  };
+
   onMarkerDragEnd = (event) => {
     let newLat = event.latLng.lat();
     let newLng = event.latLng.lng();
     console.log(event);
 
     Geocode.fromLatLng(newLat, newLng).then(
-      console.log("Latitude", newLat, "Longitude", newLng),
+      console.log("Latitude", newLat, "Longitude", newLng)
 
       // this.setState({ mapPosition: {lat:newLat}, markerPosition: {lng:newLng} })
       // this.setState({mapPosition:{lat=}
@@ -63,7 +74,7 @@ class Map extends React.Component {
       // console.log(newLat, newLng)
 
       //   this.setState{
-      //     
+      //
       // mapPosition: {
       //   lat: newLat,
       //   lng: newLng,
@@ -110,15 +121,51 @@ class Map extends React.Component {
             }}
           >
             <InfoWindow>
-          <div>{this.state.address}</div>
+              <div>{this.state.address}</div>
             </InfoWindow>
           </Marker>
+          <Marker
+          />
+          {this.state.locations.length ? (
+            <div>
+              {this.state.locations.map(location => {
+                return (
+                  <Marker
+                  position = {{
+                    lat: location.lat,
+                    lng: location.lng
+                  }}
+                  />
+                )
+              })}
+        
+            </div>
+            
+          ) : (<h5>There is no Food Sharing Location here</h5>)}
+          {/* <Marker
+          
+                position={{
+                  lat: 45.0861,
+                  lng: -93.2633,
+                }}
+              />; */}
+
+          {/* {Geocode.fromAddress("Coon Rapids").then(
+            (response) => {
+              const { lat, lng } = response.results[0].geometry.location;
+              
+              console.log(lat, lng);
+            },
+            (error) => {
+              console.error(error);
+            }
+          )} */}
         </GoogleMap>
       ))
     );
 
     return (
-      <div>
+      <div className="mapContainer">
         <Navbar />
 
         {/* <Autocomplete
@@ -137,6 +184,7 @@ class Map extends React.Component {
           
           // onPlaceSelected={this.onPlaceSelected}
         /> */}
+
         {/* <AddressBar/> */}
         <div className="container">
           {/* <Searchbar/> */}
@@ -164,7 +212,7 @@ class Map extends React.Component {
               </ListContainer>
             </div>
             <div className="col-xs-12 col-md-6">
-{/* <AutoCompletePlaces/> */}
+              {/* <AutoCompletePlaces/> */}
               <PlacesAutocomplete
                 value={this.state.address}
                 onChange={this.handleChange}
@@ -216,7 +264,7 @@ class Map extends React.Component {
                   <div style={{ height: `600px`, width: `100%` }} />
                 }
                 mapElement={<div style={{ height: `100%`, width: "100%" }} />}
-              />
+              ></MapWithAMarker>
             </div>
           </div>
         </div>
