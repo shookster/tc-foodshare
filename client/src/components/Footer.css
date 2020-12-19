@@ -1,17 +1,12 @@
-.footer{
-    text-align: center;
-    margin-top: 20px;
-    color:white;
-    background-color: black;
-    flex-shrink: 0;
-    position:absolute;
-    left:0;
-    bottom:0;
-    right:0;
-    /* border-bottom: 2rem solid; */
-
-    /* margin-bottom: -50px; */
+.footer {
+  text-align: center;
+  margin-top: 40px;
+  color: white;
+  background-color: black;
+  margin-bottom: 0px;
+  justify-content: first baseline;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
-/* .push {
-    height: 50px;
-  } */

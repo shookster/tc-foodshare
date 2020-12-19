@@ -1,5 +1,15 @@
 import React from "react";
-import "./List.css"
+import "./List.css";
+import {
+  TwitterIcon,
+  TwitterShareButton,
+  EmailShareButton,
+  FacebookShareButton,
+  WhatsappShareButton,
+  LinkedinShareButton,
+
+}
+from  "react-share"
 
 export default function List(props) {
   return (
@@ -9,8 +19,16 @@ export default function List(props) {
       Address: {props.address} <br />
       Foods: {props.food}<br />
       Description: {props.description}<br />
-      <div> <button type="button" className="btn btn-primary btn-sm">
+      <div> 
+        {/* <TwitterIcon size={32} round={true} />
+        <TwitterShareButton/> */}
+        <button type="button" className="btn btn-primary btn-sm">
         Share
+        
+      {/* <EmailShareButton/>
+      <FacebookShareButton/>
+      <WhatsappShareButton />
+      <LinkedinShareButton /> */}
       </button>
       <button type="button" className="btn btn-success btn-sm">
         Direction

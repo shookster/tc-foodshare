@@ -7,9 +7,9 @@ router.route("/")
   .post(locationController.create);
 
 // Matches with "/api/location/:id"
-router.route("/:id")
-  .get(locationController.findById)
-  .put(locationController.update)
-  .delete(locationController.remove);
+// router.route("/:id")
+//   .get(locationController.findById)
+//   .put(locationController.update)
+//   .delete(locationController.remove);
 
 module.exports = router;

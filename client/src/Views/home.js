@@ -6,10 +6,10 @@ import "./home.css";
 
 function Home() {
   return (
-    <div className="homePage">
+    <body className="containerPage">
       <Navbar />
-      <div >
-        <h5 className="aboutText">About</h5>
+      <div className="about">
+        <h5>About</h5>
 
         <div>
           <Link to="/map">
@@ -28,7 +28,7 @@ function Home() {
       </div>
 
       <Footer />
-    </div>
+    </body>
   );
 }
 
