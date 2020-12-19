@@ -9,11 +9,12 @@
   -o-background-size: cover;
   background-size: cover; */
   margin: auto;
-  height: max-content;
+  height: 800px;
   /* width: fit-content; */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  /* min-height: 100%; */
 }
 
 .aboutCard {
@@ -25,4 +26,8 @@
 
 .card{
   align-self: center;
+}
+
+.aboutText {
+  color: gainsboro
 }

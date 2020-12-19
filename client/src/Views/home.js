@@ -8,8 +8,8 @@ function Home() {
   return (
     <div className="homePage">
       <Navbar />
-      <div className="card aboutCard">
-        <h5>About</h5>
+      <div >
+        <h5 className="aboutText">About</h5>
 
         <div>
           <Link to="/map">

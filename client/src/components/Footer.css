@@ -3,4 +3,15 @@
     margin-top: 20px;
     color:white;
     background-color: black;
+    flex-shrink: 0;
+    position:absolute;
+    left:0;
+    bottom:0;
+    right:0;
+    /* border-bottom: 2rem solid; */
+
+    /* margin-bottom: -50px; */
 }
+/* .push {
+    height: 50px;
+  } */
