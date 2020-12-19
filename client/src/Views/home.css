@@ -20,7 +20,7 @@
 
 .about {
   height: auto;
-  width: 400px;
+  width: 100%;
   justify-content: center;
   justify-items: center;
   align-content: center;
@@ -33,4 +33,15 @@
 
 .aboutText {
   color: gainsboro
+}
+
+.bold {
+  font-weight: bold
+}
+
+.about-text-box {
+  height: auto;
+  width: 50%;
+  position: inherit;
+  margin-left: 100px;
 }
