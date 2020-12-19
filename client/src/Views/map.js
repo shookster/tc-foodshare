@@ -21,14 +21,14 @@ import ListContainer from "../components/List-container";
 import Input from "../components/Input";
 import "./map.css";
 import AutoCompletePlaces from "../components/PlacesAutoComplete";
-import API from "../utils/API"
+import API from "../utils/API";
 // import Header from "../../../Portfolio-React/src/components/Header";
 
 Geocode.setApiKey("AIzaSyD812o98-5qpcViO3kCoUa8mpd4eyflbPo");
 
 class Map extends React.Component {
   state = {
-    locations:[],
+    locations: [],
     address: "",
     city: "",
     area: "",
@@ -43,16 +43,22 @@ class Map extends React.Component {
       lat: 44.986656,
       lng: -93.258133,
     },
+    filter: false,
+    filteredLocation: [],
+    // this.state.locations ? this.state.locations.filter(location => location.address.toLocaleLowerCase().includes(this.state.address.toLocaleLowerCase())) : []
   };
 
-  loadLocations;
+  componentDidMount() {
+    this.loadLocations();
+  }
 
-  loadLocations() {
+  loadLocations = () => {
     API.getLocation()
-      .then(res => 
-        this.setState.locations(res.data)
-      )
-      .catch(err => console.log(err));
+      .then((res) => {
+        console.log("Location list", this.state.locations);
+        this.setState({ locations: res.data });
+      })
+      .catch((err) => console.log(err));
   };
 
   onMarkerDragEnd = (event) => {
@@ -60,6 +66,7 @@ class Map extends React.Component {
     let newLng = event.latLng.lng();
     console.log(event);
 
+    // Adding markers on the map
     Geocode.fromLatLng(newLat, newLng).then(
       console.log("Latitude", newLat, "Longitude", newLng)
 
@@ -89,7 +96,15 @@ class Map extends React.Component {
   };
 
   handleChange = (address) => {
-    this.setState({ address });
+    this.setState({ address: address });
+    this.setState({ filter: address ? true : false });
+    this.setState({
+      filteredLocation: this.state.locations.filter((location) =>
+        location.address
+          .toLocaleLowerCase()
+          .includes(this.state.address.toLocaleLowerCase()) 
+      ),
+    });
   };
 
   handleSelect = (address) => {
@@ -103,6 +118,7 @@ class Map extends React.Component {
   };
 
   render() {
+    // this.loadLocations();
     const MapWithAMarker = withScriptjs(
       withGoogleMap((props) => (
         <GoogleMap
@@ -124,24 +140,27 @@ class Map extends React.Component {
               <div>{this.state.address}</div>
             </InfoWindow>
           </Marker>
-          <Marker
-          />
           {this.state.locations.length ? (
-            <div>
-              {this.state.locations.map(location => {
-                return (
-                  <Marker
-                  position = {{
-                    lat: location.lat,
-                    lng: location.lng
-                  }}
-                  />
-                )
-              })}
-        
-            </div>
-            
-          ) : (<h5>There is no Food Sharing Location here</h5>)}
+            (console.log("Location Object", this.state.locations),
+            (
+              <div>
+                {this.state.locations.map((location, idx) => {
+                  console.log(parseInt(location.lat));
+                  return (
+                    <Marker
+                      key={idx}
+                      position={{
+                        lat: parseFloat(location.lat),
+                        lng: parseFloat(location.lng),
+                      }}
+                    />
+                  );
+                })}
+              </div>
+            ))
+          ) : (
+            <h5>There is no Food Sharing Location here</h5>
+          )}
           {/* <Marker
           
                 position={{
@@ -165,10 +184,12 @@ class Map extends React.Component {
     );
 
     return (
-      <div className="mapContainer">
-        <Navbar />
+      this.loadLocations,
+      (
+        <div className="mapContainer">
+          <Navbar />
 
-        {/* <Autocomplete
+          {/* <Autocomplete
 
           // style={{
            
@@ -185,92 +206,115 @@ class Map extends React.Component {
           // onPlaceSelected={this.onPlaceSelected}
         /> */}
 
-        {/* <AddressBar/> */}
-        <div className="container">
-          {/* <Searchbar/> */}
+          {/* <AddressBar/> */}
+          <div className="container">
+            {/* <Searchbar/> */}
 
-          <div style={{ textAlign: "left" }}>
-            <h3>
-              <b>Food Sharing Locations</b>
-            </h3>
-          </div>
-
-          <div className="row lg-12">
-            <div className="col-xs-6 col-md-6">
-              <ListContainer>
-                <List />
-                <List />
-                <List />
-                <List />
-                <List />
-                <List />
-                <List />
-                <List />
-                <List />
-                <List />
-                <List />
-              </ListContainer>
+            <div style={{ textAlign: "left" }}>
+              <h3>
+                <b>Food Sharing Locations</b>
+              </h3>
             </div>
-            <div className="col-xs-12 col-md-6">
-              {/* <AutoCompletePlaces/> */}
-              <PlacesAutocomplete
-                value={this.state.address}
-                onChange={this.handleChange}
-                onSelect={this.handleSelect}
-                style={{ justifyItems: "center" }}
-              >
-                {({
-                  getInputProps,
-                  suggestions,
-                  getSuggestionItemProps,
-                  loading,
-                }) => (
-                  <div>
-                    <input
-                      {...getInputProps({
-                        placeholder: "Search Places ...",
-                        className: "location-search-input",
-                      })}
-                    />
-                    <div className="autocomplete-dropdown-container">
-                      {loading && <div>Loading...</div>}
-                      {suggestions.map((suggestion) => {
-                        const className = suggestion.active
-                          ? "suggestion-item--active"
-                          : "suggestion-item";
-                        // inline style for demonstration purpose
-                        const style = suggestion.active
-                          ? { backgroundColor: "#fafafa", cursor: "pointer" }
-                          : { backgroundColor: "#ffffff", cursor: "pointer" };
+
+            <div className="row lg-12">
+              <div className="col-xs-6 col-md-6">
+                <ListContainer>
+                  {!this.state.filter
+                    ? this.state.locations.map((location, idx) => {
                         return (
-                          <div
-                            {...getSuggestionItemProps(suggestion, {
-                              className,
-                              style,
-                            })}
-                          >
-                            <span>{suggestion.description}</span>
-                          </div>
+                          <List
+                            key={idx}
+                            onClick={() => {
+                              console.log("List onclick");
+                            }}
+                            address={location.address}
+                            food={location.FoodItems[0].category}
+                            description={location.FoodItems[0].item_description}
+                          />
                         );
-                      })}
+                      })
+                    : this.state.filteredLocation.length === 0 ? <h4>Sorry no Locations found in this area</h4> :  (this.state.filteredLocation.map((filteredLocation, idx) => {
+                        console.log(
+                          "filtered filteredLocation",
+                          filteredLocation
+                        );
+                        return (
+                          <List
+                            key={idx}
+                            onClick={() => {
+                              console.log("List onclick");
+                            }}
+                            address={filteredLocation.address}
+                            food={filteredLocation.FoodItems[0].category}
+                            description={
+                              filteredLocation.FoodItems[0].item_description
+                            }
+                          />
+                        );
+                      }))}
+                </ListContainer>
+              </div>
+              <div className="col-xs-12 col-md-6">
+                {/* <AutoCompletePlaces/> */}
+                <PlacesAutocomplete
+                  value={this.state.address}
+                  onChange={this.handleChange}
+                  onSelect={this.handleSelect}
+                  style={{ justifyItems: "center" }}
+                >
+                  {({
+                    getInputProps,
+                    suggestions,
+                    getSuggestionItemProps,
+                    loading,
+                  }) => (
+                    <div>
+                      <input
+                        {...getInputProps({
+                          placeholder: "Search Places ...",
+                          className: "location-search-input",
+                        })}
+                      />
+                      <div className="autocomplete-dropdown-container">
+                        {loading && <div>Loading...</div>}
+                        {suggestions.map((suggestion) => {
+                          const className = suggestion.active
+                            ? "suggestion-item--active"
+                            : "suggestion-item";
+                          // inline style for demonstration purpose
+                          const style = suggestion.active
+                            ? { backgroundColor: "#fafafa", cursor: "pointer" }
+                            : { backgroundColor: "#ffffff", cursor: "pointer" };
+                          return (
+                            <div
+                              {...getSuggestionItemProps(suggestion, {
+                                className,
+                                style,
+                              })}
+                            >
+                              <span>{suggestion.description}</span>
+                            </div>
+                          );
+                        })}
+                      </div>
                     </div>
-                  </div>
-                )}
-              </PlacesAutocomplete>
-              <MapWithAMarker
-                googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyD812o98-5qpcViO3kCoUa8mpd4eyflbPo&v=3.exp&libraries=geometry,drawing,places"
-                loadingElement={<div style={{ height: `100%` }} />}
-                containerElement={
-                  <div style={{ height: `600px`, width: `100%` }} />
-                }
-                mapElement={<div style={{ height: `100%`, width: "100%" }} />}
-              ></MapWithAMarker>
+                  )}
+                </PlacesAutocomplete>
+                <MapWithAMarker
+                  googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyD812o98-5qpcViO3kCoUa8mpd4eyflbPo&v=3.exp&libraries=geometry,drawing,places"
+                  loadingElement={<div style={{ height: `100%` }} />}
+                  containerElement={
+                    <div style={{ height: `600px`, width: `100%` }} />
+                  }
+                  mapElement={<div style={{ height: `100%`, width: "100%" }} />}
+                ></MapWithAMarker>
+              </div>
             </div>
           </div>
-        </div>
 
-        <Footer />
-      </div>
+          <Footer />
+        </div>
+      )
     );
   }
 }

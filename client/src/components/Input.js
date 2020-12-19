@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import "./Input.css";
 import API from "../utils/API";
 import Geocode from "react-geocode";
-import {
-   Marker,
-} from "react-google-maps";
+import { Marker } from "react-google-maps";
 
 function InputCard() {
   const [address, setAddress] = useState("");
@@ -12,22 +10,35 @@ function InputCard() {
   const [description, setDescription] = useState("");
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
+  const [currentLat, setCurrentLat] = useState("");
+  const [currentLng, setCurrentLng] = useState("");
 
-  
-  
   const submitHandler = (event) => {
     event.preventDefault();
     API.saveLocation({
       address: address,
       category: category,
       item_description: description,
-      lat:lat,
-      lng:lng
+      lat: lat,
+      lng: lng,
     });
 
     setAddress("");
-  
-  
+  };
+
+  const getPosition = (position) => {
+    setLat (position.coords.latitude);
+    setLng (position.coords.longitude);
+    setAddress(position.coords.latitude + ", " + position.coords.longitude)
+    console.log("CurrentLngLat", currentLat, currentLng)
+  };
+
+  const getLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(getPosition);
+    } else {
+      console.log("Geolocation is not supported by this browser.");
+    }
   };
 
   return (
@@ -43,96 +54,108 @@ function InputCard() {
               name="address"
               placeholder="Enter Donating  Address"
               type="text"
-              class="form-control"
+              className="form-control"
               aria-label="Default"
               aria-describedby="inputGroup-sizing-default"
               onChange={
-                Geocode.fromAddress(address).then(
-                  
+                (Geocode.fromAddress(address).then(
                   (response) => {
                     const { lat, lng } = response.results[0].geometry.location;
                     setLat(lat);
-                    setLng(lng)
-              
+                    setLng(lng);
+
                     console.log(lat, lng, "Input Address", address);
                   },
                   (error) => {
                     console.error(error);
                   }
                 ),
-                (event) => setAddress(event.target.value)}
+                (event) => setAddress(event.target.value))
+              }
             />
           </div>
-          <div class="col">
-            <button type="button" className="btn btn-success btn-md">
+          <div className="col">
+            <button
+              type="button"
+              className="btn useMyLocation btn-success btn-md"
+              onClick={getLocation}
+            >
               Use My Location
             </button>
           </div>
         </div>
         {/* Food Category */}
         <b>Please Choose Food Category:</b>
-        <div class="custom-control custom-checkbox">
+        <div className="custom-control custom-checkbox">
           <input
             name="category"
             value="Canned Foods"
             type="checkbox"
-            class="custom-control-input"
+            className="custom-control-input"
             id="customCheck1"
             onChange={(event) => setCategory(event.target.value)}
           />
-          <label class="custom-control-label" for="customCheck1">
+          <label className="custom-control-label" for="customCheck1">
             Canned Foods
           </label>
         </div>
-        <div class="custom-control custom-checkbox">
+        <div className="custom-control custom-checkbox">
           <input
             name="category"
             value="Breads/Grains"
             type="checkbox"
-            class="custom-control-input"
+            className="custom-control-input"
             id="customCheck2"
-            onChange={(event) => setCategory(category + "-- " + event.target.value)}
+            onChange={(event) =>
+              setCategory(category + "-- " + event.target.value)
+            }
           />
-          <label class="custom-control-label" for="customCheck2">
+          <label className="custom-control-label" for="customCheck2">
             Breads/Grains
           </label>
         </div>
-        <div class="custom-control custom-checkbox">
+        <div className="custom-control custom-checkbox">
           <input
             name="category"
             value="Vegetables/Fruits"
             type="checkbox"
-            class="custom-control-input"
+            className="custom-control-input"
             id="customCheck3"
-            onChange={(event) => setCategory(category + "-- " + event.target.value)}
+            onChange={(event) =>
+              setCategory(category + "-- " + event.target.value)
+            }
           />
-          <label class="custom-control-label" for="customCheck3">
+          <label className="custom-control-label" for="customCheck3">
             Vegetables/Fruits
           </label>
         </div>
-        <div class="custom-control custom-checkbox">
+        <div className="custom-control custom-checkbox">
           <input
             name="category"
             value="Drink"
             type="checkbox"
-            class="custom-control-input"
+            className="custom-control-input"
             id="customCheck4"
-            onChange={(event) => setCategory(category + "-- " + event.target.value)}
+            onChange={(event) =>
+              setCategory(category + "-- " + event.target.value)
+            }
           />
-          <label class="custom-control-label" for="customCheck4">
+          <label className="custom-control-label" for="customCheck4">
             Drinks
           </label>
         </div>
-        <div class="custom-control custom-checkbox">
+        <div className="custom-control custom-checkbox">
           <input
             name="category"
             value="Other"
             type="checkbox"
-            class="custom-control-input"
+            className="custom-control-input"
             id="customCheck5"
-            onChange={(event) => setCategory(category + "-- " + event.target.value)}
+            onChange={(event) =>
+              setCategory(category + "-- " + event.target.value)
+            }
           />
-          <label class="custom-control-label" for="customCheck5">
+          <label className="custom-control-label" for="customCheck5">
             Other
           </label>
         </div>
@@ -141,7 +164,7 @@ function InputCard() {
           name="description"
           className="textarea"
           rows="4"
-          cols="50"
+          cols="32"
           placeholder="Description / Comment"
           onChange={(event) => setDescription(event.target.value)}
         ></textarea>{" "}

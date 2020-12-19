@@ -5,8 +5,8 @@ export default {
         return axios.post("/api/input", locationInfo);
       },
 
-      getLocation: function(locationInfo){
-        return axios.get("api/location", locationInfo)
+      getLocation: function(){
+        return axios.get("api/input")
       }
 
 }

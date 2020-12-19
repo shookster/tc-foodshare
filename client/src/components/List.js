@@ -7,34 +7,39 @@ import {
   FacebookShareButton,
   WhatsappShareButton,
   LinkedinShareButton,
-
-}
-from  "react-share"
+} from "react-share";
 
 export default function List(props) {
   return (
-      
-    <div className="listGroup"  >
-    
+    <div className="listGroup">
       Address: {props.address} <br />
-      Foods: {props.food}<br />
-      Description: {props.description}<br />
-      <div> 
+      Foods: {props.food}
+      <br />
+      Description: {props.description}
+      <br />
+      <div>
         {/* <TwitterIcon size={32} round={true} />
         <TwitterShareButton/> */}
         <button type="button" className="btn btn-primary btn-sm">
-        Share
-        
-      {/* <EmailShareButton/>
+          Share
+          {/* <EmailShareButton/>
       <FacebookShareButton/>
       <WhatsappShareButton />
       <LinkedinShareButton /> */}
-      </button>
-      <button type="button" className="btn btn-success btn-sm">
-        Direction
-      </button></div>
-      <hr color="red"/>
-      
-    </div> 
+        </button>
+        <button type="button" className="btn btn-success btn-sm">
+          Direction
+        </button>
+        <button
+          onClick={() => {
+            console.log("current location");
+          }}
+        >
+          {" "}
+          Show Location
+        </button>
+      </div>
+      <hr color="red" />
+    </div>
   );
 }
