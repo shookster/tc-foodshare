@@ -15,6 +15,7 @@ function InputCard() {
 
   const submitHandler = (event) => {
     event.preventDefault();
+    
     API.saveLocation({
       address: address,
       category: category,
@@ -24,6 +25,9 @@ function InputCard() {
     });
 
     setAddress("");
+    setCategory("");
+    setDescription("");
+     console.log(address, category, description)
   };
 
   const getPosition = (position) => {
@@ -51,6 +55,7 @@ function InputCard() {
         <div className="row address">
           <div className="col">
             <input
+            required="true"
               name="address"
               placeholder="Enter Donating  Address"
               type="text"
