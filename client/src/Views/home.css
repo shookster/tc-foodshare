@@ -30,3 +30,7 @@
   border-radius: 80px;
   position: relative;
 }
+
+.aboutText {
+  color: gainsboro
+}
