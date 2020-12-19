@@ -1,22 +1,37 @@
 import React, { useState } from "react";
 import "./Input.css";
 import API from "../utils/API";
+import Geocode from "react-geocode";
+import {
+   Marker,
+} from "react-google-maps";
 
 function InputCard() {
   const [address, setAddress] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
+  const [lat, setLat] = useState("");
+  const [lng, setLng] = useState("");
+
+  
+  
   const submitHandler = (event) => {
     event.preventDefault();
     API.saveLocation({
       address: address,
       category: category,
       item_description: description,
+      lat:lat,
+      lng:lng
     });
+
+    setAddress("");
+  
+  
   };
 
   return (
-    <container className="card">
+    <container className="card inputCard">
       <span className="title">
         <h5>Please add details below</h5>
       </span>
@@ -31,7 +46,21 @@ function InputCard() {
               class="form-control"
               aria-label="Default"
               aria-describedby="inputGroup-sizing-default"
-              onChange={(event) => setAddress(event.target.value)}
+              onChange={
+                Geocode.fromAddress(address).then(
+                  
+                  (response) => {
+                    const { lat, lng } = response.results[0].geometry.location;
+                    setLat(lat);
+                    setLng(lng)
+              
+                    console.log(lat, lng, "Input Address", address);
+                  },
+                  (error) => {
+                    console.error(error);
+                  }
+                ),
+                (event) => setAddress(event.target.value)}
             />
           </div>
           <div class="col">

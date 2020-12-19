@@ -5,8 +5,8 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING(50),
       allowNull: false,
     },
-    latitude: DataTypes.DECIMAL,
-    longitude: DataTypes.DECIMAL,
+    lat: DataTypes.DECIMAL(10,8),
+    lng: DataTypes.DECIMAL(10,8),
     phone_number: DataTypes.STRING,
   });
 

@@ -2,7 +2,11 @@ const db = require("../models");
 
 module.exports = {
   create: function (req, res) {
-    db.Location.create({ address: req.body.address })
+    db.Location.create({
+      address: req.body.address,
+      lat: req.body.lat,
+      lng: req.body.lng,
+    })
       .then((location) => {
         db.FoodItem.create({
           category: req.body.category,
@@ -15,8 +19,7 @@ module.exports = {
   },
 
   findAll: function (req, res) {
-     db.Location.findAll({ include: [{ all: true, nested: true }]}
-      )
+    db.Location.findAll({ include: [{ all: true, nested: true }] })
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },

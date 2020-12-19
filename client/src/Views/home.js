@@ -6,9 +6,9 @@ import "./home.css";
 
 function Home() {
   return (
-    <div className="homePage">
+    <body className="containerPage">
       <Navbar />
-      <div className="card aboutCard">
+      <div className="about">
         <h5>About</h5>
 
         <div>
@@ -28,7 +28,7 @@ function Home() {
       </div>
 
       <Footer />
-    </div>
+    </body>
   );
 }
 
