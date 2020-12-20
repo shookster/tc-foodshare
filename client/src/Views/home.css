@@ -16,6 +16,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
+  display: grid;
 }
 
 .about {
@@ -41,7 +42,12 @@
 
 .about-text-box {
   height: auto;
-  width: 50%;
-  position: inherit;
-  margin-left: 100px;
+  width: 100%;
+  justify-content: center;
+  justify-items: center;
+  align-content: center;
+  text-align: center;
+  color: white;
+  align-items: center;
+  position:inherit;
 }
