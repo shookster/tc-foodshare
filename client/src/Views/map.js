@@ -102,7 +102,7 @@ class Map extends React.Component {
       filteredLocation: this.state.locations.filter((location) =>
         location.address
           .toLocaleLowerCase()
-          .includes(this.state.address.toLocaleLowerCase()) 
+          .includes(this.state.address.toLocaleLowerCase())
       ),
     });
   };
@@ -219,44 +219,50 @@ class Map extends React.Component {
             <div className="row lg-12">
               <div className="col-xs-6 col-md-6">
                 <ListContainer>
-                  {!this.state.filter
-                    ? this.state.locations.map((location, idx) => {
-                        return (
-                          <List
-                            key={idx}
-                            onClick={() => {
-                              console.log("List onclick");
-                            }}
-                            address={location.address}
-                            food={location.FoodItems[0].category}
-                            description={location.FoodItems[0].item_description}
-                          />
-                        );
-                      })
-                    : this.state.filteredLocation.length === 0 ? <h4>Sorry no Locations found in this area</h4> :  (this.state.filteredLocation.map((filteredLocation, idx) => {
-                        console.log(
-                          "filtered filteredLocation",
-                          filteredLocation
-                        );
-                        return (
-                          <List
-                            key={idx}
-                            onClick={() => {
-                              console.log("List onclick");
-                            }}
-                            address={filteredLocation.address}
-                            food={filteredLocation.FoodItems[0].category}
-                            description={
-                              filteredLocation.FoodItems[0].item_description
-                            }
-                          />
-                        );
-                      }))}
+                  {!this.state.filter ? (
+                    this.state.locations.map((location, idx) => {
+                      return (
+                        <List
+                          key={idx}
+                          onClick={() => {
+                            console.log("List onclick");
+                          }}
+                          address={location.address}
+                          food={location.FoodItems[0].category}
+                          description={location.FoodItems[0].item_description}
+                        />
+                      );
+                    })
+                  ) : this.state.filteredLocation.length === 0 ? (
+                    <h4>Sorry no Locations found in this area</h4>
+                  ) : (
+                    this.state.filteredLocation.map((filteredLocation, idx) => {
+                      console.log(
+                        "filtered filteredLocation",
+                        filteredLocation
+                      );
+                      return (
+                        <List
+                          key={idx}
+                          onClick={() => {
+                            console.log("List onclick");
+                          }}
+                          address={filteredLocation.address}
+                          food={filteredLocation.FoodItems[0].category}
+                          description={
+                            filteredLocation.FoodItems[0].item_description
+                          }
+                        />
+                      );
+                    })
+                  )}
                 </ListContainer>
               </div>
               <div className="col-xs-12 col-md-6">
                 {/* <AutoCompletePlaces/> */}
                 <PlacesAutocomplete
+                  searchOptions={["cities"]}
+                  // types={['city']}
                   value={this.state.address}
                   onChange={this.handleChange}
                   onSelect={this.handleSelect}
