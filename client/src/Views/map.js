@@ -27,7 +27,6 @@ import API from "../utils/API";
 
 Geocode.setApiKey("AIzaSyD812o98-5qpcViO3kCoUa8mpd4eyflbPo");
 
-
 class Map extends React.Component {
   state = {
     locations: [],
@@ -55,6 +54,7 @@ class Map extends React.Component {
     filter: false,
     filteredLocation: [],
     InfoWindowShow: false,
+    selectedLocation: null
     // this.state.locations ? this.state.locations.filter(location => location.address.toLocaleLowerCase().includes(this.state.address.toLocaleLowerCase())) : []
   };
 
@@ -146,6 +146,7 @@ class Map extends React.Component {
 
           <div>
             {this.state.locations.map((location, idx) => {
+              if (this.state.selectedLocation != null && location.id != this.state.selectedLocation) return null;
               // console.log(parseInt(location.lat), idx);
               return this.state.InfoWindowShow ? (
                 <Marker
@@ -156,9 +157,8 @@ class Map extends React.Component {
                     lng: parseFloat(location.lng),
                   }}
                   title={location.address}
-                 
                 >
-                  <InfoWindow>
+                  <InfoWindow id={location.id}>
                     <div>{location.address}</div>
                   </InfoWindow>
                 </Marker>
@@ -246,13 +246,14 @@ class Map extends React.Component {
                           description={location.FoodItems[0].item_description}
                         >
                           <button
-                            id = {location.id}
+                            id={location.id}
                             className="btn btn-secondary btn-sm"
                             onClick={() => {
                               !this.state.InfoWindowShow
                                 ? this.setState({ InfoWindowShow: true })
                                 : this.setState({ InfoWindowShow: false });
 
+                                this.setState({ selectedLocation: location.id })
                               console.log(
                                 "current location",
                                 this.state.markerPosition,
@@ -292,8 +293,7 @@ class Map extends React.Component {
                                 !this.state.InfoWindowShow
                                   ? this.setState({ InfoWindowShow: true })
                                   : this.setState({ InfoWindowShow: false });
-                                  this.setState({filter:true})
-
+                                this.setState({ filter: true, selectedLocation: filteredLocation.id });
                                 console.log(
                                   "current location",
                                   this.state.markerPosition,
