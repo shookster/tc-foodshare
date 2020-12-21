@@ -132,8 +132,9 @@ class Map extends React.Component {
         geocodeByAddress(address)
       .then((results) => getLatLng(results[0]))
       .then((latLng) => {
-        console.log("Success", latLng);
+        
         this.setState({ mapPosition: latLng, markerPosition: latLng });
+        console.log("Success", latLng, "mapPosition -", this.state.mapPosition, "markerPosition -", this.state.markerPosition) ;
       })
       .catch((error) => console.error("Error", error));
   };
@@ -290,9 +291,9 @@ class Map extends React.Component {
                             <button
                               className="btn btn-secondary btn-sm"
                               onClick={() => {
-                                !this.state.InfoWindowShow
-                                  ? this.setState({ InfoWindowShow: true })
-                                  : this.setState({ InfoWindowShow: false });
+                                this.state.InfoWindowShow
+                                  ? (this.setState({ InfoWindowShow: false }))
+                                  :( this.setState({ InfoWindowShow: true }));
 
                                 console.log("current location");
                               }}
@@ -330,7 +331,7 @@ class Map extends React.Component {
                           className: "location-search-input",
                         })}
                       />
-                      {/* <div className="autocomplete-dropdown-container">
+                      <div className="autocomplete-dropdown-container">
                         {loading && <div>Loading...</div>}
                         {suggestions.map((suggestion) => {
                           const className = suggestion.active
@@ -351,7 +352,7 @@ class Map extends React.Component {
                             </div>
                           );
                         })}
-                      </div> */}
+                      </div>
                     </div>
                   )}
                 </PlacesAutocomplete>
