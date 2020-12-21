@@ -22,5 +22,7 @@ module.exports = function (sequelize, DataTypes) {
     });
   };
 
+
+//yes  
   return User;
 };
