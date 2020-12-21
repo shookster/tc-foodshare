@@ -1,16 +1,5 @@
 .containerPage {
   background: url(../components/image/food3.jpg) no-repeat center fixed;
-  /* height: 950px;
-  background-color: black;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-attachment: unset;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  padding-bottom: 0px;
-  justify-items: center; */
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;

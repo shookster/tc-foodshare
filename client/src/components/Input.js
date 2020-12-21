@@ -2,45 +2,49 @@ import React, { useState } from "react";
 import "./Input.css";
 import API from "../utils/API";
 import Geocode from "react-geocode";
-import {
-   Marker,
-} from "react-google-maps";
+import { Marker } from "react-google-maps";
+
 function InputCard() {
   const [address, setAddress] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
+  const [currentLat, setCurrentLat] = useState("");
+  const [currentLng, setCurrentLng] = useState("");
+
   const submitHandler = (event) => {
     event.preventDefault();
-    setAddress(`Test Set`);
+    
     API.saveLocation({
       address: address,
       category: category,
       item_description: description,
-      lat:lat,
-      lng:lng
+      lat: lat,
+      lng: lng,
     });
-    //Brock modified to log in handler
+
     setAddress("");
-    console.log("This is address after reset" + address);
-    //Brock added to get checkboxes cleared, can turn into React but wanted it working for now
-    document.getElementById("customCheck1").checked=false;
-    document.getElementById("customCheck2").checked=false;
-    document.getElementById("customCheck3").checked=false;
-    document.getElementById("customCheck4").checked=false;
-    document.getElementById("customCheck5").checked=false;
     setCategory("");
-    console.log("This is category after reset" + category);
     setDescription("");
-    console.log("This is description after reset" + description);
-    //End of Brock modified to log in handler
+     console.log(address, category, description)
   };
-  //Brock added for logging
-  console.log("This is address outside of submitHandler" + address);
-  console.log("This is category outside of submitHandler" + category);
-  console.log("This is description outside of submitHandler" + description);
-//End of Brock add for logging
+
+  const getPosition = (position) => {
+    setLat (position.coords.latitude);
+    setLng (position.coords.longitude);
+    setAddress(position.coords.latitude + ", " + position.coords.longitude)
+    console.log("CurrentLngLat", currentLat, currentLng)
+  };
+
+  const getLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(getPosition);
+    } else {
+      console.log("Geolocation is not supported by this browser.");
+    }
+  };
+
   return (
     <container className="card inputCard">
       <span className="title">
@@ -51,31 +55,36 @@ function InputCard() {
         <div className="row address">
           <div className="col">
             <input
+            required="true"
               name="address"
               placeholder="Enter Donating  Address"
               type="text"
-              //Brock added value setting below
-              value={address}
               className="form-control"
               aria-label="Default"
               aria-describedby="inputGroup-sizing-default"
               onChange={
-                Geocode.fromAddress(address).then(
+                (Geocode.fromAddress(address).then(
                   (response) => {
                     const { lat, lng } = response.results[0].geometry.location;
                     setLat(lat);
-                    setLng(lng)
+                    setLng(lng);
+
                     console.log(lat, lng, "Input Address", address);
                   },
                   (error) => {
                     console.error(error);
                   }
                 ),
-                (event) => setAddress(event.target.value)}
+                (event) => setAddress(event.target.value))
+              }
             />
           </div>
           <div className="col">
-            <button type="button" className="btn btn-success btn-md">
+            <button
+              type="button"
+              className="btn useMyLocation btn-success btn-md"
+              onClick={getLocation}
+            >
               Use My Location
             </button>
           </div>
@@ -102,7 +111,9 @@ function InputCard() {
             type="checkbox"
             className="custom-control-input"
             id="customCheck2"
-            onChange={(event) => setCategory(category + "-- " + event.target.value)}
+            onChange={(event) =>
+              setCategory(category + "-- " + event.target.value)
+            }
           />
           <label className="custom-control-label" for="customCheck2">
             Breads/Grains
@@ -115,7 +126,9 @@ function InputCard() {
             type="checkbox"
             className="custom-control-input"
             id="customCheck3"
-            onChange={(event) => setCategory(category + "-- " + event.target.value)}
+            onChange={(event) =>
+              setCategory(category + "-- " + event.target.value)
+            }
           />
           <label className="custom-control-label" for="customCheck3">
             Vegetables/Fruits
@@ -128,7 +141,9 @@ function InputCard() {
             type="checkbox"
             className="custom-control-input"
             id="customCheck4"
-            onChange={(event) => setCategory(category + "-- " + event.target.value)}
+            onChange={(event) =>
+              setCategory(category + "-- " + event.target.value)
+            }
           />
           <label className="custom-control-label" for="customCheck4">
             Drinks
@@ -141,7 +156,9 @@ function InputCard() {
             type="checkbox"
             className="custom-control-input"
             id="customCheck5"
-            onChange={(event) => setCategory(category + "-- " + event.target.value)}
+            onChange={(event) =>
+              setCategory(category + "-- " + event.target.value)
+            }
           />
           <label className="custom-control-label" for="customCheck5">
             Other
@@ -152,10 +169,8 @@ function InputCard() {
           name="description"
           className="textarea"
           rows="4"
-          cols="50"
+          cols="32"
           placeholder="Description / Comment"
-          //Brock added value setting below
-          value={description}
           onChange={(event) => setDescription(event.target.value)}
         ></textarea>{" "}
         <br />
@@ -170,4 +185,5 @@ function InputCard() {
     </container>
   );
 }
+
 export default InputCard;

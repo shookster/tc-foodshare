@@ -19,11 +19,11 @@ if (!global.hasOwnProperty("models")) {
     }
    );
   }
-  global.models = {
-    Sequelize: Sequelize,
-    sequelize: sequelize,
-    User: sequelize.import(__dirname + "/user"),
-  // add your other models here
-    };
-  }
-  module.exports = global.models;
+};
+
+db.sequelize = sequelize;
+db.Sequelize = Sequelize;
+
+module.exports = db;
+
+//this should be right
