@@ -16,11 +16,12 @@
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
+  display: grid;
 }
 
 .about {
   height: auto;
-  width: 400px;
+  width: 100%;
   justify-content: center;
   justify-items: center;
   align-content: center;
@@ -33,4 +34,21 @@
 
 .aboutText {
   color: gainsboro
+}
+
+.bold {
+  font-weight: bold
+}
+
+.about-text-box {
+  height: auto;
+  width: 60%;
+  margin: 0 auto;
+  justify-content: center;
+  justify-items: center;
+  align-content: center;
+  text-align: center;
+  color: white;
+  align-items: center;
+  position:inherit;
 }
