@@ -1,17 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import LogoutButton from "./LogoutButton";
+import LoginButton from "./LoginButton";
+import { isAuthenticated, useAuth0 } from "@auth0/auth0-react";
 
 function Navbar() {
+  const AuthenticationButton = () => {
+    const { isAuthenticated } = useAuth0();
+
+    return isAuthenticated ? <LogoutButton /> : <LoginButton />;
+  }
+
   return (
     <div>
       <nav className="navbar navbar-dark bg-dark">
         <Link className="navbar-brand" to="/">
           TC - Food Share
         </Link>
-        <ul className="navbar-nav">
-          <LogoutButton />
-        </ul>
+        <ul className="navbar-nav">{AuthenticationButton()}</ul>
       </nav>
     </div>
   );
