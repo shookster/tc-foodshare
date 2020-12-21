@@ -1,13 +1,5 @@
 import React from "react";
 import "./List.css";
-import {
-  TwitterIcon,
-  TwitterShareButton,
-  EmailShareButton,
-  FacebookShareButton,
-  WhatsappShareButton,
-  LinkedinShareButton,
-} from "react-share";
 
 export default function List(props) {
   return (
@@ -21,15 +13,19 @@ export default function List(props) {
         {/* <TwitterIcon size={32} round={true} />
         <TwitterShareButton/> */}
         <button type="button" className="btn btn-primary btn-sm">
-          Share
-          {/* <EmailShareButton/>
-      <FacebookShareButton/>
-      <WhatsappShareButton />
-      <LinkedinShareButton /> */}
+          Share          
         </button>
-        <button type="button" className="btn btn-success btn-sm">
-          Direction
-        </button>
+
+        <a
+          type="button"
+          className="btn btn-success btn-sm"
+          target="_blank"
+          href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(props.address)}`}
+        >
+         Direction
+        </a>
+        {props.children}
+       
         <button
           onClick={() => {
             console.log("current location");
@@ -38,6 +34,7 @@ export default function List(props) {
           {" "}
           Show Location
         </button>
+
       </div>
       <hr color="red" />
     </div>
