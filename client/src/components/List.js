@@ -12,6 +12,7 @@ import {
 export default function List(props) {
   return (
     <div className="listGroup">
+     
       Address: {props.address} <br />
       Foods: {props.food}
       <br />
@@ -30,14 +31,7 @@ export default function List(props) {
         <button type="button" className="btn btn-success btn-sm">
           Direction
         </button>
-        <button
-          onClick={() => {
-            console.log("current location");
-          }}
-        >
-          {" "}
-          Show Location
-        </button>
+        {props.children}        
       </div>
       <hr color="red" />
     </div>

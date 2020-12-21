@@ -6,6 +6,7 @@ import {
   withGoogleMap,
   GoogleMap,
   Marker,
+  Circle,
 } from "react-google-maps";
 import PlacesAutocomplete, {
   geocodeByAddress,
@@ -35,6 +36,12 @@ class Map extends React.Component {
     state: "",
     zoom: 50,
     height: 400,
+    LatLng: [
+      {
+        lat: "",
+        lng: "",
+      },
+    ],
     mapPosition: {
       lat: 44.986656,
       lng: -93.258133,
@@ -45,6 +52,7 @@ class Map extends React.Component {
     },
     filter: false,
     filteredLocation: [],
+    InfoWindowShow: false,
     // this.state.locations ? this.state.locations.filter(location => location.address.toLocaleLowerCase().includes(this.state.address.toLocaleLowerCase())) : []
   };
 
@@ -52,11 +60,24 @@ class Map extends React.Component {
     this.loadLocations();
   }
 
+  storeLatLng = () => {
+    this.state.locations.map((location) => {
+      const LatLngList = { lat: "", lng: "" };
+      return (
+        (LatLngList.lat = location.lat),
+        (LatLngList.lng = location.lng),
+        this.state.LatLng.push(LatLngList)
+      );
+    });
+  };
+
   loadLocations = () => {
     API.getLocation()
       .then((res) => {
-        console.log("Location list", this.state.locations);
         this.setState({ locations: res.data });
+        this.storeLatLng();
+        console.log("Location list", this.state.locations);
+        console.log("LatLng List", this.state.LatLng);
       })
       .catch((err) => console.log(err));
   };
@@ -108,7 +129,7 @@ class Map extends React.Component {
   };
 
   handleSelect = (address) => {
-    geocodeByAddress(address)
+        geocodeByAddress(address)
       .then((results) => getLatLng(results[0]))
       .then((latLng) => {
         console.log("Success", latLng);
@@ -128,7 +149,7 @@ class Map extends React.Component {
             lng: this.state.markerPosition.lng,
           }}
         >
-          <Marker
+          {/* <Marker
             draggable={false}
             onDragEnd={this.onMarkerDragEnd}
             position={{
@@ -136,31 +157,41 @@ class Map extends React.Component {
               lng: this.state.markerPosition.lng,
             }}
           >
-            <InfoWindow>
+            {/* <InfoWindow>
               <div>{this.state.address}</div>
-            </InfoWindow>
-          </Marker>
-          {this.state.locations.length ? (
-            (console.log("Location Object", this.state.locations),
-            (
-              <div>
-                {this.state.locations.map((location, idx) => {
-                  console.log(parseInt(location.lat));
-                  return (
-                    <Marker
-                      key={idx}
-                      position={{
-                        lat: parseFloat(location.lat),
-                        lng: parseFloat(location.lng),
-                      }}
-                    />
-                  );
-                })}
-              </div>
-            ))
-          ) : (
-            <h5>There is no Food Sharing Location here</h5>
-          )}
+            </InfoWindow> */}
+          {/* </Marker> */}
+
+          <div>
+            {this.state.locations.map((location, idx) => {
+              // console.log(parseInt(location.lat), idx);
+              return this.state.InfoWindowShow ? (
+                <Marker
+                  id={location.id}
+                  key={idx}
+                  position={{
+                    lat: parseFloat(location.lat),
+                    lng: parseFloat(location.lng),
+                  }}
+                  title={location.address}
+               >
+                  <InfoWindow>
+                    <div>{location.address}</div>
+                  </InfoWindow>
+                </Marker>
+              ) : (
+                <Marker
+                  id={location.id}
+                  key={idx}
+                  position={{
+                    lat: parseFloat(location.lat),
+                    lng: parseFloat(location.lng),
+                  }}
+                />
+              );
+            })}
+          </div>
+
           {/* <Marker
           
                 position={{
@@ -168,7 +199,6 @@ class Map extends React.Component {
                   lng: -93.2633,
                 }}
               />; */}
-
           {/* {Geocode.fromAddress("Coon Rapids").then(
             (response) => {
               const { lat, lng } = response.results[0].geometry.location;
@@ -223,6 +253,7 @@ class Map extends React.Component {
                     this.state.locations.map((location, idx) => {
                       return (
                         <List
+                          id={location.id}
                           key={idx}
                           onClick={() => {
                             console.log("List onclick");
@@ -230,7 +261,9 @@ class Map extends React.Component {
                           address={location.address}
                           food={location.FoodItems[0].category}
                           description={location.FoodItems[0].item_description}
-                        />
+                        >
+
+                        </List>
                       );
                     })
                   ) : this.state.filteredLocation.length === 0 ? (
@@ -252,7 +285,23 @@ class Map extends React.Component {
                           description={
                             filteredLocation.FoodItems[0].item_description
                           }
-                        />
+                        >
+                          {
+                            <button
+                              className="btn btn-secondary btn-sm"
+                              onClick={() => {
+                                !this.state.InfoWindowShow
+                                  ? this.setState({ InfoWindowShow: true })
+                                  : this.setState({ InfoWindowShow: false });
+
+                                console.log("current location");
+                              }}
+                              hidden={false}
+                            >
+                              Show Location
+                            </button>
+                          }
+                        </List>
                       );
                     })
                   )}
@@ -261,7 +310,7 @@ class Map extends React.Component {
               <div className="col-xs-12 col-md-6">
                 {/* <AutoCompletePlaces/> */}
                 <PlacesAutocomplete
-                  searchOptions={["cities"]}
+                  searchOptions={"cities"}
                   // types={['city']}
                   value={this.state.address}
                   onChange={this.handleChange}
@@ -277,11 +326,11 @@ class Map extends React.Component {
                     <div>
                       <input
                         {...getInputProps({
-                          placeholder: "Search Places ...",
+                          placeholder: "Search Cities ...",
                           className: "location-search-input",
                         })}
                       />
-                      <div className="autocomplete-dropdown-container">
+                      {/* <div className="autocomplete-dropdown-container">
                         {loading && <div>Loading...</div>}
                         {suggestions.map((suggestion) => {
                           const className = suggestion.active
@@ -302,7 +351,7 @@ class Map extends React.Component {
                             </div>
                           );
                         })}
-                      </div>
+                      </div> */}
                     </div>
                   )}
                 </PlacesAutocomplete>
