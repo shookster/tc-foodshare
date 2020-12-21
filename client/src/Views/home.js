@@ -9,7 +9,7 @@ function Home() {
   return (
     <body className="containerPage">
       <Navbar />
-      <div className="about">
+      <div className="about-text-box">
         <div>
           <p className="bold">Twin Cities Food Share strives to create a bridge between individuals or families who are in need of food items and those who are wanting to donate food directly to the community.</p>
           <p>
