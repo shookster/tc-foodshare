@@ -1,0 +1,54 @@
+.containerPage {
+  background: url(../components/image/food3.jpg) no-repeat center fixed;
+  /* height: 950px;
+  background-color: black;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: unset;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  padding-bottom: 0px;
+  justify-items: center; */
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  display: grid;
+}
+
+.about {
+  height: auto;
+  width: 100%;
+  justify-content: center;
+  justify-items: center;
+  align-content: center;
+  text-align: center;
+  color: white;
+  align-items: center;
+  border-radius: 80px;
+  position: relative;
+}
+
+.aboutText {
+  color: gainsboro
+}
+
+.bold {
+  font-weight: bold
+}
+
+.about-text-box {
+  height: auto;
+  width: 60%;
+  margin: 0 auto;
+  justify-content: center;
+  justify-items: center;
+  align-content: center;
+  text-align: center;
+  color: white;
+  align-items: center;
+  position:inherit;
+}

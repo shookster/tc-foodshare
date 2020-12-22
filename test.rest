@@ -1,0 +1,9 @@
+post http://localhost:3001/api/input
+
+content-type: application/json
+
+{
+    "address": "sample",
+    "category": "other",
+    "description" "none"
+}

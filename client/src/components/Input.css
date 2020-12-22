@@ -1,0 +1,22 @@
+.inputCard {
+  margin-top: 20px;
+  background-color: rgb(243, 242, 242);
+  max-width: 50%;
+  margin-left: 50px;
+  text-align: left;
+  justify-items: center;
+}
+
+.textarea {
+  margin-top: 20px;
+}
+
+.address {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.title {
+  margin-top: 10px;
+  text-align: center;
+}
