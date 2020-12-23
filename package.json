@@ -7,8 +7,7 @@
     "start": "node src/index.js",
     "client": "webpack",
     "seed": "node scripts/seedDB.js",
-    "install": "cd client && npm install",
-    "build": "npm run build"
+    "install": "cd client && npm install"
   },
   "author": "",
   "license": "ISC",
