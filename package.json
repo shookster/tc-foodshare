@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node src/index.js",
     "client": "webpack",
+    "build": "cd client && npm run build",
     "seed": "node scripts/seedDB.js",
     "install": "cd client && npm install"
   },
