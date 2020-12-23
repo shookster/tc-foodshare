@@ -34,3 +34,5 @@ db.sequelize.sync().then(() => {
     console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
   });
 });
+
+//test
