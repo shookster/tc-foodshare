@@ -4,8 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "react-scripts start",
-    "client": "cd client && npm run start",
+    "start": "node src/index.js",
+    "client": "webpack",
     "seed": "node scripts/seedDB.js",
     "install": "cd client && npm install",
     "build": "npm run build"
