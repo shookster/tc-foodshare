@@ -4,10 +4,10 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node src/index.js",
-    "client": "webpack",
-    "seed": "node scripts/seedDB.js",
-    "install": "cd client && npm install"
+    "start": "node app.js",
+    "heroku-postbuild": "cd client && npm install && npm build",
+    "client": "cd client && npm start",
+    "server": "nodemon app.js"
   },
   "author": "",
   "license": "ISC",
