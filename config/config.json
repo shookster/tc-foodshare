@@ -1,24 +1,23 @@
 {
   "development": {
-    "username": "userz",
-    "password": "zuser12",
-    "database": "tc_foodshare_db",
-    "host": "127.0.0.1",
+    "username": "u3k4prse1at33b60",
+    "password": "vvfnwebmu3qef9rq",
+    "database": "o9zmx2g799gn356e",
+    "host": "dt3bgg3gu6nqye5f.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "dialect": "mysql"
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
+    "username": "u3k4prse1at33b60",
+    "password": "vvfnwebmu3qef9rq",
+    "database": "o9zmx2g799gn356e",
+    "host": "dt3bgg3gu6nqye5f.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "use_env_variable": "JAWSDB_URL",
+    "username": "u3k4prse1at33b60",
+    "password": "vvfnwebmu3qef9rq",
+    "database": "o9zmx2g799gn356e",
+    "host": "dt3bgg3gu6nqye5f.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "dialect": "mysql"
   }
 }
