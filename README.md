@@ -1,4 +1,4 @@
-# Title
+# Twin Cities Foodshare
 
 ## Table of Contents
 
